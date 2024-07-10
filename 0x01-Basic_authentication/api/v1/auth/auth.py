@@ -35,7 +35,9 @@ class Auth:
         """
         A public method that checks the authorization header
         """
-        return request
+        if request is not None:
+            return request.headers.get('Authorization')
+        return None
 
     def current_user(self, request=None) -> TypeVar('User'):
         """A public method that checks for current user"""
