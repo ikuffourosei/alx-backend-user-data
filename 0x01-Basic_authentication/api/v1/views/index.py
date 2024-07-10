@@ -34,3 +34,13 @@ def unauthorized():
     Return custom 401 abort page
     """
     abort(401)
+
+
+@app_views.route('/forbidden', methods=['GET'], strict_slashes=False)
+def forbidden():
+    """
+    GET api/v1/forbidden
+
+    Return custom forbidden page
+    """
+    abort(403)
