@@ -28,7 +28,7 @@ class Auth:
             path = path.rstrip('/')
         if path in allowed:
             return False
-        else: 
+        else:
             return True
 
     def authorization_header(self, request=None) -> str:
