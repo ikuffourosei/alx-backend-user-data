@@ -3,6 +3,7 @@
 from api.v1.auth.auth import Auth
 import base64 as b
 
+
 class BasicAuth(Auth):
     """A Basic Auth class that inherits from Auth"""
     def extract_base64_authorization_header(self,
@@ -15,13 +16,15 @@ class BasicAuth(Auth):
         return None
 
     def decode_base64_authorization_header(self,
-                                           base64_authorization_header: str) -> str:
+                                           base64_authorization_header: str
+                                           ) -> str:
         """Decoding the extracted string to base64"""
         if isinstance(base64_authorization_header, str):
             try:
-                decoded_bytes = b.b64decode(base64_authorization_header)
-                if b.b64encode(decoded_bytes).decode('utf-8') == base64_authorization_header:
-                    return decoded_bytes.decode('utf-8')
+                dec_bytes = b.b64decode(base64_authorization_header)
+                base_header = base64_authorization_header
+                if b.b64encode(dec_bytes).decode('utf-8') == base_header:
+                    return dec_bytes.decode('utf-8')
             except Exception:
                 return None
         return None
