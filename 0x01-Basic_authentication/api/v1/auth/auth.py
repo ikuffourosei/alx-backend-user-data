@@ -15,7 +15,8 @@ class Auth:
         """
         A public method to validate if a url requires an authentication
 
-        Return: False or True
+        Return: False if it does not require
+        or True if it does require authentication
         """
         if path is None or excluded_paths is None or excluded_paths == []:
             return True
@@ -41,4 +42,8 @@ class Auth:
 
     def current_user(self, request=None) -> TypeVar('User'):
         """A public method that checks for current user"""
-        return request
+        if request is not None:
+            user = getattr(request, 'user', None)
+            if user and not user.is_anonymous:
+                return request.user
+        return None
