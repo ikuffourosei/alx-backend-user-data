@@ -4,6 +4,7 @@ from api.v1.auth.auth import Auth
 from typing import Tuple, TypeVar
 import base64 as b
 from models.user import User
+from flask import request
 
 
 class BasicAuth(Auth):
@@ -55,3 +56,13 @@ class BasicAuth(Auth):
             for items in valid_user:
                 if items.is_valid_password(user_pwd) is True:
                     return items
+
+    def current_user(self, request=None) -> TypeVar('User'):
+        """ overloads Auth and retrieves the User instance for a request"""
+        header = self.authorization_header(request)
+        extracted_header = self.extract_base64_authorization_header(header)
+        decoded = self.decode_base64_authorization_header(extracted_header)
+        user_credentials = self.extract_user_credentials(decoded)
+        user_email, user_pwd = user_credentials
+        valid_user = self.user_object_from_credentials(user_email, user_pwd)
+        return valid_user
