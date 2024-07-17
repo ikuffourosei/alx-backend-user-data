@@ -8,7 +8,8 @@ Base = declarative_base()
 
 
 class User(Base):
-    """A users table definition"""
+    """A users table definition
+    Defining the columns of the users table"""
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True)
