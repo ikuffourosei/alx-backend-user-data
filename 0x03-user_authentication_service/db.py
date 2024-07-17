@@ -34,10 +34,10 @@ class DB:
         """Adds a user to the database
         """
         try:
-            Newuser = User(email=email, hashed_password=hashed_password)
-            self._session.add(Newuser)
+            new_user = User(email=email, hashed_password=hashed_password)
+            self._session.add(new_user)
             self._session.commit()
         except Exception:
             self._session.rollback()
-            Newuser = None
-        return Newuser
+            new_user = None
+        return new_user
