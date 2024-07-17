@@ -35,10 +35,10 @@ class DB:
         """
         try:
             user = User(email=email, hashed_password=hashed_password)
-            sess = self._session
-            sess.add(user)
-            sess.commit()
+            self._session
+            self._session.add(user)
+            self._session.commit()
         except Exception:
-            sess.rollback()
+            self._session.rollback()
             user = None
         return user
