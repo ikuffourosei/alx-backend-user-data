@@ -38,7 +38,7 @@ class DB:
             sess = self._session
             sess.add(user)
             sess.commit()
-        except Exception as e:
+        except Exception:
             sess.rollback()
             user = None
         return user
